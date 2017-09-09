@@ -87,9 +87,55 @@ class Sort extends Algorithm {
     }
     return arr
   }
+  mergeSort (arr) {
+    // 实现原理：
+    // 1. 以数组长度的一般作为中间值，分成两个序列
+    // 2. 递归回调函数，直到每个数组的长度小于2，方可进行递归操作
+    // 3. 递归结束后数组已经排序好
+    // 最好时间复杂度：O(nlogn)
+    // 最差时间复杂度：O(nlogn)
+    if (arr.length < 2) {
+      return arr
+    }
+    let len = arr.length
+    let mid = parseInt(len / 2)
+    let merge = (left, right) => {
+      let final = []
+      while (left.length && right.length) {
+        if (left[0] < right[0]) {
+          final.push(left.shift())
+        } else {
+          final.push(right.shift())
+        }
+      }
+      return arr.concat(left.concat(right))
+    }
+    return merge(this.mergeSort(arr.slice(0, mid)), this.mergeSort(arr.slice(mid)))
+  }
+  quickSort (arr) {
+    // 实现原理
+    // 1. 选取第一个值作为基准值
+    // 2. 数组中大于基准值的值放在右边，小于基准值的值放在左边(二叉树实现原理)
+    // 3. 递归回调函数，直到数组长度小于2时返回
+    // 4. 此时数组已经排序好
+    // 最好时间复杂度：O(nlogn)
+    // 最差时间复杂度：O(nlogn)
+    if (arr.length < 2) {
+      return arr
+    }
+    let [left, right, mid, len, i] = [[], [], arr[0], arr.length]
+    for (i = 1; i < len; i++) {
+      if (arr[i] < mid) {
+        left.push(arr[i])
+      } else {
+        right.push(arr[i])
+      }
+    }
+    return this.quickSort(left).concat(mid).concat(this.quickSort(right))
+  }
 }
 
 var a = new Sort({
   end: 10
 })
-console.log(a.shellSort(a.random(true)))
+console.log(a.quickSort(a.random(true)))
