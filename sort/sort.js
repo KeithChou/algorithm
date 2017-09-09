@@ -48,9 +48,48 @@ class Sort extends Algorithm {
     }
     return arr
   }
+  insertSort (arr) {
+    // 实现原理
+    // 1. 假定第一个元素已经排序，从第二个元素开始从后向前扫描
+    // 2. 如果已排序的元素大于i元素，则交换他们的位置(通过splice添加再删除)
+    // 3. 重复1 - 2步骤
+    // 4. 此时数组已经排序好
+    // 最好时间复杂度：O(n)
+    // 最差时间复杂度：O(n^2)
+    let [len, i, j] = [arr.length]
+    for (i = 1; i < len; i++) {
+      for (j = 0; j < i; j++) {
+        if (arr[j] > arr[i]) {
+          arr.splice(j, 0, arr[i])
+          arr.splice(i + 1, 1)
+        }
+      }
+    }
+    return arr
+  }
+  shellSort (arr) {
+    // 实现原理：插入排序优化版本
+    // 1. 以n/2为步长并且对步长取半值直到步长为1
+    // 2. 最初以较大的步长进行交换，接着再以较小的步长进行交换，
+    // 3. 最后数组基本已经排序，此时步长为①，接着以插入排序算法进行元素的交换
+    // 4. 此时数组已经排序好
+    // 最好时间复杂度：O(n)
+    // 最差时间复杂度：O(nlog^2(n))
+    let [len, gap, i, j, temp] = [arr.length]
+    for (gap = len >> 1; gap > 0; gap >>= 1) {
+      for (i = gap; i < len; i++) {
+        temp = arr[i]
+        for (j = i - gap; j >= 0 && arr[j] > temp; j -= gap) {
+          arr[j + gap] = arr[j]
+        }
+        arr[j + gap] = temp
+      }
+    }
+    return arr
+  }
 }
 
 var a = new Sort({
-  end: 100
+  end: 10
 })
-console.log(a.selectSort(a.random()))
+console.log(a.shellSort(a.random(true)))
