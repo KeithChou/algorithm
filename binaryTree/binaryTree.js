@@ -11,8 +11,9 @@ const removeNode = Symbol('removeNode')
 const findMinNode = Symbol('findMinNode')
 
 class Node {
-  constructor (key) {
+  constructor (key, index) {
     this.key = key
+    this.index = index
     this.left = null
     this.right = null
   }
@@ -23,8 +24,8 @@ class BinaryTree extends Algorithm {
     super(option)
     this.root = null
   }
-  [insert] (key, cb) {
-    let newNode = new Node(key)
+  [insert] (key, index, cb) {
+    let newNode = new Node(key, index)
     if (this.root === null) {
       this.root = newNode
     } else {
@@ -95,7 +96,7 @@ class BinaryTree extends Algorithm {
     } else if (key > node.key) {
       return this[searchNode](node.right, key)
     } else {
-      return true
+      return node.index
     }
   }
   [findMinNode] (node) {
@@ -150,8 +151,8 @@ class BinaryTree extends Algorithm {
       cb = arr
       arr = [8, 3, 10, 1, 6, 14, 4, 7, 13]
     }
-    arr.forEach(value => {
-      this[insert](value, cb)
+    arr.forEach((value, index) => {
+      this[insert](value, index, cb)
     })
   }
   // 中序遍历二叉树, callback接受一个参数，表示二叉树中的每个节点指。先序，后序相同。
