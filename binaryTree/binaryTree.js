@@ -1,4 +1,5 @@
 const Algorithm = require('../index.js')
+const leaf = Symbol('leaf')
 const insert = Symbol('insert')
 const insertNode = Symbol('insertNode')
 const inOrderTraverseNode = Symbol('inOrderTraverseNode')
@@ -23,15 +24,15 @@ class BinaryTree extends Algorithm {
   constructor (option) {
     super(option)
     this.root = null
+    this[leaf] = []
   }
-  [insert] (key, index, cb) {
+  [insert] (key, index) {
     let newNode = new Node(key, index)
     if (this.root === null) {
       this.root = newNode
     } else {
       this[insertNode](this.root, newNode)
     }
-    cb(this.root)
   }
   [insertNode] (node, newNode) {
     if (newNode.key < node.key) {
@@ -151,9 +152,13 @@ class BinaryTree extends Algorithm {
       cb = arr
       arr = [8, 3, 10, 1, 6, 14, 4, 7, 13]
     }
+    for (let i = 0; i < this[leaf].length; i++) {
+      arr.push(this[leaf][i])
+    }
     arr.forEach((value, index) => {
-      this[insert](value, index, cb)
+      this[insert](value, index)
     })
+    cb(this.root)
   }
   // 中序遍历二叉树, callback接受一个参数，表示二叉树中的每个节点指。先序，后序相同。
   // 用途：将二叉树转换成双向链表、从小到大排序二叉树
@@ -204,4 +209,12 @@ class BinaryTree extends Algorithm {
       arr.shift()
     }
   }
+  // 向二叉树中添加节点
+  push () {
+    let [node, args] = [this[leaf], Array.prototype.slice.call(arguments)]
+    node = node.concat(args)
+    this.root = null
+    this.createBinaryTree()
+    return node[node.length - 1]
+  }}
 }
