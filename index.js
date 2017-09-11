@@ -2,8 +2,7 @@ class Algorithm {
   constructor (option) {
     let setting = {
       start: 0,
-      end: 10000,
-      sort: false
+      end: 10000
     }
     this.option = Object.assign({}, setting, option)
   }
