@@ -134,8 +134,3 @@ class Sort extends Algorithm {
     return this.quickSort(left).concat(mid).concat(this.quickSort(right))
   }
 }
-
-var a = new Sort({
-  end: 10
-})
-console.log(a.quickSort(a.random(true)))
