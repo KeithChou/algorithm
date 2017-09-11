@@ -35,7 +35,7 @@ let arr = sort.random()
 ```
 1. 使用new操作符调用BinaryTree类，接受参数同Sort类，参数可不传
 
-let tree = new BinaryTree({})
+let tree = new BinaryTree(obj)
 
 2. 生成二叉树，createBinaryTree方法，接受两个参数：数组和回调函数。回调函数中接受一个参数，表示对应的节点。两个参数可选。二叉树默认为：[8, 3, 10, 1, 6, 14, 4, 7, 13]
 
