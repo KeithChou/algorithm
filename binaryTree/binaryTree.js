@@ -215,6 +215,6 @@ class BinaryTree extends Algorithm {
     node = node.concat(args)
     this.root = null
     this.createBinaryTree()
-    return node[node.length - 1]
+    return this.root
   }}
 }

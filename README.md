@@ -49,7 +49,7 @@ tree.createBinaryTree(arr, cb)
 
 后序遍历：tree.nextOrderTraverse(cb)
 
-4. push方法接受一个值作为参数，表示需要向二叉树中插入的值
+4. push方法接受一个值作为参数，表示需要向二叉树中插入的值。返回添加后的二叉树
 
 增加节点：tree.push(value)
 
