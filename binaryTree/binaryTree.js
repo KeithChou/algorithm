@@ -193,4 +193,15 @@ class BinaryTree extends Algorithm {
     let node = this[removeNode](this.root, key)
     return node
   }
+  // 从上到下打印二叉树
+  printFromTopToBottom (callback) {
+    let arr = []
+    arr.push(this.root)
+    while (arr.length) {
+      callback(arr[0].key)
+      if (arr[0].left !== null) arr.push(arr[0].left)
+      if (arr[0].right !== null) arr.push(arr[0].right)
+      arr.shift()
+    }
+  }
 }
