@@ -10,6 +10,9 @@ const searchMaxNode = Symbol('searchMaxNode')
 const searchNode = Symbol('searchNode')
 const removeNode = Symbol('removeNode')
 const findMinNode = Symbol('findMinNode')
+const inOrderArr = Symbol('inOrderArr')
+const prevOrderArr = Symbol('prevOrderArr')
+const nextOrderArr = Symbol('nextOrderArr')
 
 class Node {
   constructor (key, index) {
@@ -25,6 +28,9 @@ class BinaryTree extends Algorithm {
     super(option)
     this.root = null
     this[leaf] = []
+    this[inOrderArr] = []
+    this[prevOrderArr] = []
+    this[nextOrderArr] = []
   }
   [insert] (key, index) {
     let newNode = new Node(key, index)
@@ -49,25 +55,25 @@ class BinaryTree extends Algorithm {
       }
     }
   }
-  [inOrderTraverseNode] (node, callback) {
+  [inOrderTraverseNode] (node) {
     if (node !== null) {
-      this[inOrderTraverseNode](node.left, callback)
-      callback(node.key)
-      this[inOrderTraverseNode](node.right, callback)
+      this[inOrderTraverseNode](node.left)
+      this[inOrderArr].push(node.key)
+      this[inOrderTraverseNode](node.right)
     }
   }
-  [prevOrderTraverseNode] (node, callback) {
+  [prevOrderTraverseNode] (node) {
     if (node !== null) {
-      callback(node.key)
-      this[prevOrderTraverseNode](node.left, callback)
-      this[prevOrderTraverseNode](node.right, callback)
+      this[prevOrderArr].push(node.key)
+      this[prevOrderTraverseNode](node.left)
+      this[prevOrderTraverseNode](node.right)
     }
   }
   [nextOrderTraverseNode] (node, callback) {
     if (node !== null) {
       this[nextOrderTraverseNode](node.left, callback)
       this[nextOrderTraverseNode](node.right, callback)
-      callback(node.key)
+      this[nextOrderArr].push(node.key)
     }
   }
   [searchMinNode] (node) {
@@ -163,17 +169,20 @@ class BinaryTree extends Algorithm {
   // 中序遍历二叉树, callback接受一个参数，表示二叉树中的每个节点指。先序，后序相同。
   // 用途：将二叉树转换成双向链表、从小到大排序二叉树
   inOrderTraverse (callback = () => {}) {
-    this[inOrderTraverseNode](this.root, callback)
+    this[inOrderTraverseNode](this.root)
+    return callback(this[inOrderArr])
   }
   // 先序遍历二叉树
   // 用途：复制二叉树
   prevOrderTraverse (callback = () => {}) {
-    this[prevOrderTraverseNode](this.root, callback)
+    this[prevOrderTraverseNode](this.root)
+    return callback(this[prevOrderArr])
   }
   // 后续遍历二叉树
   // 用途：操作系统文件读取原理
   nextOrderTraverse (callback = () => {}) {
-    this[nextOrderTraverseNode](this.root, callback)
+    this[nextOrderTraverseNode](this.root)
+    return callback(this[nextOrderArr])
   }
   // 找到二叉树中的最小值，返回最小值
   // 原理：搜索🔍左子树
@@ -216,5 +225,5 @@ class BinaryTree extends Algorithm {
     this.root = null
     this.createBinaryTree()
     return this.root
-  }}
+  }
 }
