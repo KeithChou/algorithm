@@ -13,6 +13,7 @@ const findMinNode = Symbol('findMinNode')
 const inOrderArr = Symbol('inOrderArr')
 const prevOrderArr = Symbol('prevOrderArr')
 const nextOrderArr = Symbol('nextOrderArr')
+const printFromTtBArr = Symbol('printFromTtBArr')
 
 class Node {
   constructor (key, index) {
@@ -31,6 +32,7 @@ class BinaryTree extends Algorithm {
     this[inOrderArr] = []
     this[prevOrderArr] = []
     this[nextOrderArr] = []
+    this[printFromTtBArr] = []
   }
   [insert] (key, index) {
     let newNode = new Node(key, index)
@@ -212,11 +214,12 @@ class BinaryTree extends Algorithm {
     let arr = []
     arr.push(this.root)
     while (arr.length) {
-      callback(arr[0].key)
-      if (arr[0].left !== null) arr.push(arr[0].left)
-      if (arr[0].right !== null) arr.push(arr[0].right)
-      arr.shift()
+      let node = arr.shift()
+      this[printFromTtBArr].push(node.key)
+      if (node.left !== null) arr.push(node.left)
+      if (node.right !== null) arr.push(node.right)
     }
+    callback(this[printFromTtBArr])
   }
   // 向二叉树中添加节点
   push () {
