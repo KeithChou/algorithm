@@ -217,6 +217,7 @@ class BinaryTree extends Algorithm {
     let arr = []
     arr.push(this.root)
     while (arr.length) {
+      // 使用队列实现
       let node = arr.shift()
       this[printFromTtBArr].push(node.key)
       if (node.left !== null) arr.push(node.left)
