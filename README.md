@@ -41,7 +41,7 @@ let tree = new BinaryTree(obj)
 
 tree.createBinaryTree(arr, cb)
 
-3. 以下深度优先遍历算法接受一个回调函数作为参数，回调函数接受一个值，表示对应节点。
+3. 以下深度优先遍历算法接受一个回调函数作为参数，回调函数接受一个值，表示对应遍历之后的数组。
 
 中序遍历：tree.inOrderTraverse(cb)
 
