@@ -211,6 +211,9 @@ class BinaryTree extends Algorithm {
   }
   // 从上到下打印二叉树
   printFromTopToBottom (callback) {
+    if (this.root === null) {
+      return []
+    }
     let arr = []
     arr.push(this.root)
     while (arr.length) {
