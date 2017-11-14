@@ -23,11 +23,13 @@ random方法接受一个boolean值作为参数，true(默认值)表示生成的�
 let arr = sort.random()
 
 冒泡排序: sort.bubbleSort(arr)
-选择排序: sort.selectSort(arr)
+鸡尾酒排序: sort.cocksailSort(arr)
 插入排序: sort.insertSort(arr)
-希尔排序: sort.shellSort(arr)
 归并排序: sort.mergeSort(arr)
+选择排序: sort.selectSort(arr)
+希尔排序: sort.shellSort(arr)
 快速排序: sort.quickSort(arr)
+堆排序: sort.heapSort(arr)
 ```
 
 > 树
