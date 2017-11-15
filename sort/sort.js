@@ -182,8 +182,8 @@ class Sort extends Algorithm {
     function maxHeapify (start, end) {
       var dad = start
       var son = dad * 2 + 1
-      if (son >= dad) return
-      if (son + 1 < dad && arr[son] < arr[son + 1]) {
+      if (son >= end) return
+      if (son + 1 < end && arr[son] < arr[son + 1]) {
         son++
       }
       if (arr[dad] < arr[son]) {
